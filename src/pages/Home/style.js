@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    height: '20%',
+    height: '22%',
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
@@ -19,13 +19,19 @@ const styles = StyleSheet.create({
   },
 
   date: {
-    fontSize: 15,
+    fontSize: 17,
     fontWeight: '300',
     color: '#ccc'
   },
 
+  hour: {
+    color: '#adadad',
+    fontSize: 14,
+    marginTop: 5,
+  },
+
   center: {
-    height: '60%',
+    height: '58%',
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -56,11 +62,9 @@ const styles = StyleSheet.create({
   info: {
     alignItems: 'center',
     justifyContent: 'space-around',
-    padding: 8,
+    padding: 10,
     borderRadius: 5,
-    borderWidth: 0.5,
-    borderStyle: 'solid',
-    borderColor: 'rgba(204, 204, 204, 0.5)'
+    backgroundColor: 'rgba(10, 17, 54, 0.4)'
   },
 
   infoTitle: {
@@ -77,8 +81,26 @@ const styles = StyleSheet.create({
   footer: {
     height: '20%',
     width: '100%',
-    padding: 10,
-    backgroundColor: 'blue'
+    paddingHorizontal: 20,
+    justifyContent: 'space-between'
+  },
+
+  footerOptions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 10
+  },
+
+  todayText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '700'
+  },
+
+  textButton: {
+    color: '#2980b9',
+    fontSize: 16,
   }
 });
 

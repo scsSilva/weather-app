@@ -6,6 +6,7 @@ import { Feather } from '@expo/vector-icons';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import Verify from './pages/Verify';
+import Forecast from './pages/Forecast';
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -49,6 +50,7 @@ const Routes = () => {
         }}
       >
         <Stack.Screen name="Verify" component={Verify} />
+        <Stack.Screen name="Forecast" component={Forecast} />
         <Stack.Screen name="BottomAppTabs" component={BottomAppTabs} />
       </Stack.Navigator>
     </NavigationContainer>

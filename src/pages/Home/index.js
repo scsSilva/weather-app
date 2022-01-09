@@ -1,22 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ActivityIndicator, Image, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Context } from '../../shared/context';
 import { GetLocation } from '../../utils/location';
+import { GetInfoDate } from '../../utils/date';
 import globalStyles from '../../shared/globalStyles';
 import api from '../../utils/api';
 import styles from './style';
 
 import { API_KEY } from '@env';
+import ForecastItemToday from '../../components/ForecastItemToday';
 
 const Home = () => {
+  const { navigate } = useNavigation();
   const { location } = useContext(Context);
   const [info, setInfo] = useState({});
   const [loading, setLoading] = useState(false);
   const { getPositionUser } = GetLocation();
+  const { days, months } = GetInfoDate();
 
   async function getInfos() {
     setLoading(true);
-    const response = await api.get(`/forecast.json?key=${API_KEY}&q=${location.latitude},${location.longitude}&lang=pt`);
+    const response = await api.get(`/forecast.json?key=${API_KEY}&q=${location.latitude},${location.longitude}&lang=pt&days=3&aqi=yes`);
     setInfo(response.data);
     setLoading(false);
     console.log(info);
@@ -29,14 +34,10 @@ const Home = () => {
   }, [location]);
 
   const date = new Date();
-  const days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
-  const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-  
-  let image = {uri: "https://cdn.weatherapi.com/weather/64x64/day/116.png"}
 
   return (
     <>
-      { JSON.stringify(location) == '' && (
+      { JSON.stringify(location) == '{}' && (
         <View style={globalStyles.container}>
           <Text style={{ color: '#fff' }}>Acesso negado</Text>
           <Image 
@@ -49,7 +50,11 @@ const Home = () => {
         </View>
       ) }
 
-      { loading && <ActivityIndicator color="#fff" size="large" /> }
+      { loading && (
+        <View style={globalStyles.container}>
+          <ActivityIndicator color="#fff" size="large" />
+        </View>
+      ) }
 
       { JSON.stringify(info) != '{}' && (
         <View style={[globalStyles.container, { justifyContent: 'flex-start' }]}>
@@ -58,6 +63,7 @@ const Home = () => {
             <Text style={styles.date}>
               {days[date.getDay()]}, {date.getDate()} de {months[date.getMonth()]} de {date.getFullYear()}
             </Text>
+            <Text style={styles.hour}>Última atualização: {info.current.last_updated.split(' ')[1]}</Text>
           </View>
           <View style={styles.center}>
             <View style={styles.conditionInfo}>
@@ -84,13 +90,44 @@ const Home = () => {
           </View>
           <View style={styles.footer}>
             <View style={styles.footerOptions}>
-              <Text>Hoje</Text>
+              <Text style={styles.todayText}>Hoje</Text>
               <TouchableOpacity
-                onPress={() => {}}
+                onPress={() => {
+                  navigate('Forecast', {
+                    data: info
+                  });
+                }}
               >
-                <Text>Próximos dias</Text>
+                <Text style={styles.textButton}>Histórico completo</Text>
               </TouchableOpacity>
             </View>
+
+            <FlatList 
+              horizontal
+              data={info.forecast.forecastday[0].hour}
+              ItemSeparatorComponent={() => (
+                <View
+                  style={
+                    {
+                      width: 20
+                    }
+                  }
+                />
+              )}
+              renderItem={({ item, index }) => {     
+                // if (parseInt(item.time.split(' ')[1].split(':')[0]) > parseInt(info.current.last_updated.split(' ')[1].split(':')[0])) {
+                  return (
+                    <ForecastItemToday
+                      hour={item.time.split(' ')[1]}
+                      image={item.condition.icon}
+                      temp={item.temp_c}
+                    />
+                  )
+                // }
+              }}
+              keyExtractor={(item) => item.time_epoch.toString()}
+              showsHorizontalScrollIndicator={false}
+            />
           </View>
         </View>
       ) }
@@ -99,30 +136,3 @@ const Home = () => {
 }
 
 export default Home;
-
-// return (
-//   <View style={globalStyles.container}>
-//     { JSON.stringify(location) == '{}' && (
-//       <>
-//         <Text style={{ color: '#fff' }}>Acesso negado</Text>
-//         <Image 
-//           source={require('../../assets/images/access_denied.png')} 
-//           style={styles.imageAccessDeined}
-//         />
-//         <TouchableOpacity onPress={() => getPositionUser()}>
-//           <Text style={{ color: '#fff' }}>Permitir acesso</Text>
-//         </TouchableOpacity>
-//       </>
-//     ) }
-
-//     { loading && <ActivityIndicator color="#fff" size="large" /> }
-
-//     { JSON.stringify(info) != '{}' && (
-//       <>
-//         <Text style={{ color: "#fff" }}>{info.location.name}, {info.location.region}</Text>
-//         <Text style={{ color: "#fff" }}>Temperatura: {info.current.temp_c}</Text>
-//         <Text style={{ color: "#fff" }}>Condição: {info.current.condition.text}</Text>
-//       </>
-//     ) }
-//   </View>
-// )
