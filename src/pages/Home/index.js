@@ -38,13 +38,12 @@ const Home = () => {
     <>
       { JSON.stringify(location) == '{}' && (
         <View style={globalStyles.container}>
-          <Text style={{ color: '#fff' }}>Acesso negado</Text>
-          <Image 
-            source={require('../../assets/images/access_denied.png')} 
-            style={styles.imageAccessDeined}
-          />
-          <TouchableOpacity onPress={() => getPositionUser()}>
-            <Text style={{ color: '#fff' }}>Permitir acesso</Text>
+          <Text style={styles.accessDeinedText}>Acesso negado</Text>
+          <TouchableOpacity 
+            onPress={() => getPositionUser()}
+            style={styles.buttonAllowAccess}
+          >
+            <Text style={{ color: '#fff', fontSize: 16 }}>Permitir acesso</Text>
           </TouchableOpacity>
         </View>
       ) }

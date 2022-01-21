@@ -1,9 +1,20 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  imageAccessDeined: {
-    height: 100,
-    width: 100,
+  accessDeinedText: {
+    color: '#fff',
+    fontSize: 23,
+    fontWeight: '700'
+  },
+
+  buttonAllowAccess: {
+    backgroundColor: 'rgb(10, 17, 54)',
+    height: 50,
+    width: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+    marginTop: 20
   },
 
   header: {
