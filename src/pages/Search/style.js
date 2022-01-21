@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
   header: {
     height: '10%',
     width: '100%',
-    // backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -16,9 +15,8 @@ const styles = StyleSheet.create({
   },
 
   search: {
-    height: '30%',
+    height: '25%',
     width: '100%',
-    // backgroundColor: 'green',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -41,6 +39,14 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     backgroundColor: 'rgba(10, 17, 54, 0.8)'
+  },
+
+  list: {
+    height: '65%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 10
   }
 });
 

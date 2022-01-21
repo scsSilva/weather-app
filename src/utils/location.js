@@ -13,8 +13,6 @@ export function GetLocation() {
       let location = await Location.getCurrentPositionAsync({});
       await AsyncStorage.setItem('@location', JSON.stringify(location.coords));
       setLocation(location.coords);
-    } else {
-      console.log('VOCÊ NÃO QUIS...');
     }
   }
 
@@ -24,10 +22,8 @@ export function GetLocation() {
     let locationStore = await AsyncStorage.getItem('@location');
 
     if (locationStore != null) {
-      console.log('TEM LOCATION');
       setLocation(JSON.parse(locationStore));
     } else {
-      console.log('NÃO TEM LOCATION');
       getPositionUser();
     }
   }

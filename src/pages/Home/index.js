@@ -24,7 +24,6 @@ const Home = () => {
     const response = await api.get(`/forecast.json?key=${API_KEY}&q=${location.latitude},${location.longitude}&lang=pt&days=3&aqi=yes`);
     setInfo(response.data);
     setLoading(false);
-    console.log(info);
   }
   
   useEffect(() => {
@@ -59,7 +58,7 @@ const Home = () => {
       { JSON.stringify(info) != '{}' && (
         <View style={[globalStyles.container, { justifyContent: 'flex-start' }]}>
           <View style={styles.header}>
-            <Text style={[globalStyles.text, styles.placeName]}>{info.location.name}, {info.location.tz_id.split('/')[1]}</Text>
+            <Text style={[globalStyles.text, styles.placeName]}>{info.location.name}, {info.location.country}</Text>
             <Text style={styles.date}>
               {days[date.getDay()]}, {date.getDate()} de {months[date.getMonth()]} de {date.getFullYear()}
             </Text>
@@ -114,8 +113,7 @@ const Home = () => {
                   }
                 />
               )}
-              renderItem={({ item, index }) => {     
-                // if (parseInt(item.time.split(' ')[1].split(':')[0]) > parseInt(info.current.last_updated.split(' ')[1].split(':')[0])) {
+              renderItem={({ item, index }) => {
                   return (
                     <ForecastItemToday
                       hour={item.time.split(' ')[1]}

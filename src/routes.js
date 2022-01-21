@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import Verify from './pages/Verify';
 import Forecast from './pages/Forecast';
+import DetailsLocale from './pages/DetailsLocale';
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -51,6 +52,7 @@ const Routes = () => {
       >
         <Stack.Screen name="Verify" component={Verify} />
         <Stack.Screen name="Forecast" component={Forecast} />
+        <Stack.Screen name="DetailsLocale" component={DetailsLocale} />
         <Stack.Screen name="BottomAppTabs" component={BottomAppTabs} />
       </Stack.Navigator>
     </NavigationContainer>
