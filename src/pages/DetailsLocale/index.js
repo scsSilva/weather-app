@@ -14,7 +14,6 @@ const DetailsLocale = ({ route, navigation }) => {
   const { data } = route.params;
 
   useEffect(() => {
-    console.log(`DATA: ${data.id}, ${data.name}, ${data.country}, ${data.url}`)
     async function getInfo() {
       const response = await api.get(`/forecast.json?key=${API_KEY}&q=${data.url}&lang=pt`);
       setInfo(response.data);
