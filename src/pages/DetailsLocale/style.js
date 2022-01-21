@@ -39,6 +39,61 @@ const styles = StyleSheet.create({
     color: '#adadad',
     fontSize: 14,
     marginTop: 5,
+  },
+
+  contentCenter: {
+    height: '60%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+
+  conditionInfo: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '65%',
+    width: '100%',
+  },
+
+  conditionText: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: '700'
+  },
+
+  rowConditions: {
+    height: '35%',
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  
+  info: {
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: 'rgba(10, 17, 54, 0.4)'
+  },
+
+  infoTitle: {
+    color: '#ccc',
+    fontSize: 16,
+  },
+
+  contentInfo: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+
+  footer: {
+    height: '20%',
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
   }
 });
 
